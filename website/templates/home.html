@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-
     {% if user.is_authenticated %}
 
     <h1>Customers...</h1>
-
+    <a href="{% url 'add_customer' %}" class="btn btn-primary">Add Customer</a>
+    </br>
+    </br>
     <table class="table table-striped table-hover table-bordered">
       <thead class="table-dark">
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
-          <th scope="col">Phone</th>
           <th scope="col">Address</th>
           <th scope="col">City</th>
           <th scope="col">State</th>
@@ -27,13 +26,12 @@
         <tr>
             <td>{{customer.first_name}} {{customer.last_name}}</td>
             <td>{{customer.email}}</td>
-            <td>{{customer.phone}}</td>
             <td>{{customer.address}}</td>
             <td>{{customer.city}}</td>     
             <td>{{customer.state}}</td>
             <td>{{customer.zipcode}}</td>
-            <td>{{customer.created_at}}</td>  
-            <td>{{customer.id}}</td>   
+            <td>{{customer.create_at}}</td>  
+            <td><a href="{% url 'customer' customer.id  %}">{{customer.id}} <a/>  </td>   
           </tr>
        {%endfor%}
 {% endif %}
@@ -41,6 +39,7 @@
     </table>
     
     {% else %}
+<div class="col-md-6 offset-md-3">
     <h1>Login</h1>
     <br/>
     <form method="POST" action="{% url 'home' %}">
@@ -57,7 +56,6 @@
             <button type="submit" class="btn btn-primary">Login</button>
           </form>
     </form>
-
-
+</div>
 {% endif %}
 {% endblock %}
